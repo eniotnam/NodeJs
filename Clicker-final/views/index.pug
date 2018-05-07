@@ -1,0 +1,86 @@
+extends layout
+
+block content
+    body
+        div(class="all")
+            figure(class="icone" onclick="openit('info')")
+                img(width="100%" src="images/iconeinfo.png")
+                h5(class='names')=name
+                
+            figure(class="icone" onclick="openit('chat')")
+                img(width="100%" src="images/msn-logo.png")
+                h5(class='names')=name
+                
+            div(class="roue")
+                p § 
+                    span(id="counter")
+                p level: 
+                    span(id="level")
+                div(class="eolienne")
+                    img(src="images/helice.png" width="100%" class="img")
+       
+            div(id="chat" class="info")
+                div(class="title")
+                    h2 Chat
+                    button(onclick="closeit('chat');") 
+                        h2 x
+                    button(onclick="$('#chat').hide();") 
+                        h2 _
+                div(class="contains")
+                    if user
+                        div(style=" overflow:auto;width:100%; height:90%;")
+                            ul(id="messages" style="list-style-type: none; margin: 0; padding: 0;")
+                        div(style="position:absolute; top:90%; width:80%;")
+                            form(id="chat-form" action="")
+                                input(id="user-message" placeholder="Message" style="width:70%")
+                                button(type="submit") Envoyer
+                    else
+                        p Connectez vous pour utliser le chat!
+            
+            div(id="info" class="info")
+                div(class="title")
+                    h2 Paramètres du Profil
+                    button(onclick="closeit('info');") 
+                        h2 x
+                    button(onclick="$('#info').hide();") 
+                        h2 _
+                div(class="contains" onload="recup();")
+                    if user
+                        p Bienvenue #{user.pseudo}
+                        form(method="post" action="/users/logout")
+                            button(type="submit") Déconnexion
+                    else
+                        p Log in
+                        form(method="post" action="/users/login")
+                            input(id="pseudo" type="text" name="pseudo" value="" placeholder="Pseudo")
+                            input(id="password" type="password" name="password" value="" placeholder="Password")
+                            button(type="submit") Connexion
+                        br
+                        br
+                        p Sign up
+                        form(method="post" action="/users/signup")
+                            input(id="pseudo" type="text" name="pseudo" value="" placeholder="Pseudo")
+                            input(id="password" type="password" name="password" value="" placeholder="Password")
+                            button(type="submit") Inscription
+                
+            div(class="level")
+        
+            div(class="upgrade")
+        
+        footer
+            button(class='start' href="$('#demarer').show();") 
+                h2 Demarrer
+            div(class="footer")
+            div(class="hour")
+                span(id="div_horloge")
+        
+    script(src='https://code.jquery.com/jquery-1.11.3.min.js') 
+    script.
+        var data;   
+        data = $('.names').text();
+        $('#pseudo').val(data);
+        
+      
+    
+
+

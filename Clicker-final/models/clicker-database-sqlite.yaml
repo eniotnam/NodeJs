@@ -1,0 +1,6 @@
+dbname: users
+username:
+password:
+params:
+    dialect: sqlite
+    storage: clicker-sequelize.sqlite3
